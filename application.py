@@ -10,7 +10,7 @@ import numpy as np
 from net_config import ArchitectureConfig
 from data_preprocess import process_image_for_ocr
 import json
-
+from detect import detect
 # load model
 #model = pickle.load(open('model.pkl','rb'))
 
@@ -37,9 +37,8 @@ def predict():
         npimg = np.fromstring(filestr, np.uint8)
         # convert numpy array to image
         img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
-
+        img = detect(img)
         cv2.imwrite(input_path, img)
-
         process_image_for_ocr(input_path, input_pre_path)
         data = [Sample("", input_pre_path)]
         test_set = TextSequenceGenerator(data)
