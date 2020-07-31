@@ -78,4 +78,6 @@ def predict():
     return json.dumps(output, ensure_ascii=False).encode('utf8')
 
 if __name__ == '__main__':
-    app.run(port = 5000, debug=True)
+    #app.run(port = 5000, debug=True)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)
